@@ -1,0 +1,26 @@
+[user]
+	name = Noah Ratcliff
+	email = [email here]
+[alias]
+	a = add
+	aa = add -A :/
+	co = checkout
+	s = status
+	c = commit
+	cc = commit -m
+	cam = commit --amend
+	cob = checkout -b
+	pusm = push --recurse-submodules=on-demand
+[push]
+	default = simple
+	recurseSubmodules = check
+
+[merge]
+	tool = unityyamlmerge
+
+[mergetool "unityyamlmerge"]
+	trustExitCode = false
+	keepTemporaries = true
+	keepBackup = false
+	path = 'path/to/tool' 
+	cmd = 'path/to/tool' merge -p "$BASE" "$REMOTE" "$LOCAL" "$MERGED"
