@@ -1,16 +1,30 @@
 [user]
-	name = Noah Ratcliff
+	name = [name here]
 	email = [email here]
 [alias]
+	# Shortcuts
 	a = add
 	aa = add -A :/
 	co = checkout
 	s = status
 	c = commit
 	cc = commit -m
+	cca = commit -a -m
 	cam = commit --amend
 	cob = checkout -b
 	pusm = push --recurse-submodules=on-demand
+
+	# Clone github repository at provided path
+	# ex: "git clgh ntratcliff/gitignore"
+	clgh = "!clgh() { git clone git@github.com:$1; }; clgh"
+
+	# Add remote/origin as a github repository at the provided path 
+	# ex: "git raogh ntratcliff/gitignore"
+	raogh = "!raogh() { git remote add origin git@github.com:$1; }; raogh"
+
+	# Set up the current branch to track from origin/{branch}
+	# replaces "git push -u origin {branch}" with "git pub"
+	pub = "!pub() { br=$(git rev-parse --abbrev-ref HEAD); git push -u origin $br; }; pub"
 [push]
 	default = simple
 	recurseSubmodules = check
@@ -22,5 +36,6 @@
 	trustExitCode = false
 	keepTemporaries = true
 	keepBackup = false
-	path = 'path/to/tool' 
-	cmd = 'path/to/tool' merge -p "$BASE" "$REMOTE" "$LOCAL" "$MERGED"
+	# replace these with your tools
+	path = '/mnt/d/Program Files/Unity/2018.1.1f1/Editor/Data/Tools/UnityYAMLMerge.exe'
+	cmd = '/mnt/d/Program Files/Unity/2018.1.1f1/Editor/Data/Tools/UnityYAMLMerge.exe' merge -p --force "$BASE" "$REMOTE" "$LOCAL" "$MERGED"
