@@ -13,18 +13,28 @@
 	cam = commit --amend
 	cob = checkout -b
 	pusm = push --recurse-submodules=on-demand
-
+	asm = submodule add
+	l = log --oneline 
+	m = merge 
+	
 	# Clone github repository at provided path
 	# ex: "git clgh ntratcliff/gitignore"
-	clgh = "!clgh() { git clone git@github.com:$1; }; clgh"
-
+	clgh = "!clgh() { git clone --recurse-submodules git@github.com:$1; }; clgh"
+	
 	# Add remote/origin as a github repository at the provided path 
 	# ex: "git raogh ntratcliff/gitignore"
 	raogh = "!raogh() { git remote add origin git@github.com:$1; }; raogh"
-
+	
+	# Add the provided github repo as a submodule
+	# ex: "git asmgh ntratcliff/gitignore"
+	asmgh = "!asmgh() { git submodule add git@github.com:$1; }; asmgh"
+	
 	# Set up the current branch to track from origin/{branch}
 	# replaces "git push -u origin {branch}" with "git pub"
 	pub = "!pub() { br=$(git rev-parse --abbrev-ref HEAD); git push -u origin $br; }; pub"
+	
+	mvtag = "!move_tag() { git tag -d $1; git push remote :$1; git tag $1 $2; git push origin $1 }; move_tag"
+
 [push]
 	default = simple
 	recurseSubmodules = check
@@ -39,3 +49,9 @@
 	# replace these with your tools
 	path = '/mnt/d/Program Files/Unity/2018.1.1f1/Editor/Data/Tools/UnityYAMLMerge.exe'
 	cmd = '/mnt/d/Program Files/Unity/2018.1.1f1/Editor/Data/Tools/UnityYAMLMerge.exe' merge -p --force "$BASE" "$REMOTE" "$LOCAL" "$MERGED"
+[core]
+	safecrlf = false
+[winUpdater]
+	recentlySeenVersion = 2.20.1.windows.1
+[status]
+	submodulessummary = 1
