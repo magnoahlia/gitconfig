@@ -1,10 +1,12 @@
 [user]
-	name = [name here]
-	email = [email here]
+	name = [your email]
+	email = [your name]
 [alias]
 	# Shortcuts
 	a = add
 	aa = add -A :/
+	b = branch
+	bd = branch -d 
 	co = checkout
 	s = status
 	c = commit
@@ -14,12 +16,16 @@
 	cob = checkout -b
 	pusm = push --recurse-submodules=on-demand
 	asm = submodule add
-	l = log --oneline 
+	l = log --oneline
 	m = merge 
 	
 	# Clone github repository at provided path
 	# ex: "git clgh ntratcliff/gitignore"
 	clgh = "!clgh() { git clone --recurse-submodules git@github.com:$1; }; clgh"
+	
+	# Clone gitlab repository at provided path
+	# ex: "git clgl ntratcliff/gitignore"
+	clgl = "!clgl() { git clone --recurse-submodules git@gitlab.com:$1; }; clgl"
 	
 	# Add remote/origin as a github repository at the provided path 
 	# ex: "git raogh ntratcliff/gitignore"
@@ -33,11 +39,17 @@
 	# replaces "git push -u origin {branch}" with "git pub"
 	pub = "!pub() { br=$(git rev-parse --abbrev-ref HEAD); git push -u origin $br; }; pub"
 	
+	# Move a tag from one commit to another
 	mvtag = "!move_tag() { git tag -d $1; git push remote :$1; git tag $1 $2; git push origin $1 }; move_tag"
+
+	# typos
+	psuh = "!psuh() { echo 'psuh dude 🤙'; git push; }; psuh"
+	ush = "!ush() { echo 'what would you do without yourself? 🙄'; git push; }; ush"
 
 [push]
 	default = simple
 	recurseSubmodules = check
+	followTags = true
 
 [merge]
 	tool = unityyamlmerge
@@ -51,7 +63,28 @@
 	cmd = '/mnt/d/Program Files/Unity/2018.1.1f1/Editor/Data/Tools/UnityYAMLMerge.exe' merge -p --force "$BASE" "$REMOTE" "$LOCAL" "$MERGED"
 [core]
 	safecrlf = false
-[winUpdater]
-	recentlySeenVersion = 2.20.1.windows.1
+	excludesfile = /Users/noah/.gitignore_global
 [status]
 	submodulessummary = 1
+[pager]
+	branch = false
+	log = false
+	tag = false
+	show = false
+[init]
+	defaultBranch = main
+[advice]
+	detachedHead = false
+[submodule]
+	recurse = true
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[pull]
+	rebase = false
+[adive]
+	addEmptyPathspec = false
