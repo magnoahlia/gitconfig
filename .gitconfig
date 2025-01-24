@@ -1,6 +1,6 @@
 [user]
-	name = [your email]
-	email = [your name]
+	name = Noah Magnolia 
+	email = [email]
 [alias]
 	# Shortcuts
 	a = add
@@ -16,7 +16,8 @@
 	cob = checkout -b
 	pusm = push --recurse-submodules=on-demand
 	asm = submodule add
-	l = log --oneline
+	l = log
+	lt = log --after=12am
 	m = merge 
 	
 	# Clone github repository at provided path
@@ -44,26 +45,17 @@
 
 	# typos
 	psuh = "!psuh() { echo 'psuh dude 🤙'; git push; }; psuh"
+	spuh = "!spuh() { echo 'spuh dude 🤙'; git push; }; spuh"
 	ush = "!ush() { echo 'what would you do without yourself? 🙄'; git push; }; ush"
 
+	ignore = "!gi() { curl -sL https://www.toptal.com/developers/gitignore/api/$@ ;}; gi"
 [push]
 	default = simple
 	recurseSubmodules = check
 	followTags = true
 
-[merge]
-	tool = unityyamlmerge
-
-[mergetool "unityyamlmerge"]
-	trustExitCode = false
-	keepTemporaries = true
-	keepBackup = false
-	# replace these with your tools
-	path = '/mnt/d/Program Files/Unity/2018.1.1f1/Editor/Data/Tools/UnityYAMLMerge.exe'
-	cmd = '/mnt/d/Program Files/Unity/2018.1.1f1/Editor/Data/Tools/UnityYAMLMerge.exe' merge -p --force "$BASE" "$REMOTE" "$LOCAL" "$MERGED"
 [core]
 	safecrlf = false
-	excludesfile = /Users/noah/.gitignore_global
 [status]
 	submodulessummary = 1
 [pager]
@@ -88,3 +80,7 @@
 	rebase = false
 [adive]
 	addEmptyPathspec = false
+[log]
+	date = relative
+[format]
+	pretty = format:%C(auto,yellow)%h %C(auto,blue)%>(12,trunc)%ad %C(auto,green)%<(7,trunc)%aN%C(auto)% gD% D %C(auto,reset)%s
